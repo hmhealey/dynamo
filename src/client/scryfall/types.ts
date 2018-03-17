@@ -6,7 +6,7 @@ export enum Color {
     Green = 'G'
 };
 
-export type Card = {
+export interface Card {
     id: string,
     oracle_id: string,
 
@@ -20,7 +20,7 @@ export type Card = {
     }
 };
 
-export type Error = {
+export interface Error {
     status: number,
     code: string,
     details: string,

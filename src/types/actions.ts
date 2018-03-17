@@ -1,5 +1,3 @@
-// asdf
-
 import * as Types from 'client/scryfall/types';
 
 export interface ReceivedCard {

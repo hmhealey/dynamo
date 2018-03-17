@@ -1,5 +1,4 @@
 import React from 'react';
-import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {BrowserRouter, Link, Route} from 'react-router-dom';
 
@@ -7,6 +6,8 @@ import ScryfallClient from 'client/scryfall/client';
 import * as Types from 'client/scryfall/types';
 
 import CardImage from 'components/card_image';
+
+import configureStore from 'store';
 
 type Props = {
 }
@@ -17,7 +18,7 @@ type State = {
 }
 
 export default class Dynamo extends React.PureComponent<Props, State> {
-    // store = createStore();
+    store = configureStore();
 
     client = new ScryfallClient();
 
@@ -32,6 +33,11 @@ export default class Dynamo extends React.PureComponent<Props, State> {
 
     getCard = () => {
         this.client.getCard(this.state.value).then(({data}) => {
+            this.store.dispatch({
+                type: 'ReceivedCard',
+                card: data
+            });
+
             this.setState({
                 card: data
             });
@@ -47,21 +53,24 @@ export default class Dynamo extends React.PureComponent<Props, State> {
     render() {
         let image;
         if (this.state.card) {
-            image = <CardImage card={this.state.card} type='small'/>;
+            image = <CardImage cardName={this.state.card.name} type='small'/>;
+            // image = <CardImage card={this.state.card} type='small'/>;
         }
 
         return (
-            <div style={{display: 'flex', height: '100%'}}>
-                <div style={{backgroundColor: 'red', display: 'flex', width: 300}}>
-                    <textarea style={{flex: 1, resize: 'none'}}/>
+            <Provider store={this.store}>
+                <div style={{display: 'flex', height: '100%'}}>
+                    <div style={{backgroundColor: 'red', display: 'flex', width: 300}}>
+                        <textarea style={{flex: 1, resize: 'none'}}/>
+                    </div>
+                    <div style={{backgroundColor: 'blue', flex: 1}}>
+                        <input onChange={this.handleChange} value={this.state.value}/>
+                        <button onClick={this.getCard}>{'Clicky'}</button>
+                        <div>{this.state.card ? JSON.stringify(this.state.card) : ''}</div>
+                        {image}
+                    </div>
                 </div>
-                <div style={{backgroundColor: 'blue', flex: 1}}>
-                    <input onChange={this.handleChange} value={this.state.value}/>
-                    <button onClick={this.getCard}>{'Clicky'}</button>
-                    <div>{this.state.card ? JSON.stringify(this.state.card) : ''}</div>
-                    {image}
-                </div>
-            </div>
+            </Provider>
         );
 
         // return (
