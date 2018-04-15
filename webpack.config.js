@@ -2,7 +2,11 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path');
 
 module.exports = {
+    devServer: {
+        historyApiFallback: true
+    },
     entry: './src/index.tsx',
+    mode: 'development',
     module: {
         rules: [
             {
@@ -10,13 +14,6 @@ module.exports = {
                 use: 'ts-loader',
                 exclude: /node_modules/
             }
-        ]
-    },
-    resolve: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        modules: [
-            path.resolve(__dirname, 'src'),
-            'node_modules'
         ]
     },
     output: {
@@ -27,5 +24,12 @@ module.exports = {
         new CopyWebpackPlugin([
         	{from: 'src/index.html', to: 'index.html'}
         ])
-    ]
+    ],
+    resolve: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        modules: [
+            path.resolve(__dirname, 'src'),
+            'node_modules'
+        ]
+    }
 };
