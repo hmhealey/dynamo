@@ -9,6 +9,6 @@ export interface Entities {
     cards: Cards
 };
 
-export interface State {
+export interface StoreState {
     entities: Entities
 };
