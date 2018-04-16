@@ -1,9 +1,11 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: true,
+        hot: true
     },
     entry: './src/index.tsx',
     mode: 'development',
@@ -22,8 +24,10 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin([
-        	{from: 'src/index.html', to: 'index.html'}
-        ])
+            {from: 'src/index.html', to: 'index.html'}
+        ]),
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin()
     ],
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
