@@ -31,7 +31,9 @@ export default class Dynamo extends React.PureComponent<Props, State> {
         };
     }
 
-    getCard = () => {
+    getCard = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
         this.client.getCard(this.state.value).then(({data}) => {
             this.store.dispatch({
                 type: 'ReceivedCard',
@@ -68,8 +70,13 @@ export default class Dynamo extends React.PureComponent<Props, State> {
                         <textarea style={{flex: 1, resize: 'none'}}/>
                     </div>
                     <div style={{backgroundColor: 'blue', flex: 1}}>
-                        <input onChange={this.handleChange} value={this.state.value}/>
-                        <button onClick={this.getCard}>{'Clicky'}</button>
+                        <form onSubmit={this.getCard}>
+                            <input onChange={this.handleChange} value={this.state.value}/>
+                            <input
+                                type='submit'
+                                value='Clicky'
+                            />
+                        </form>
                         <div>{this.state.card ? JSON.stringify(this.state.card) : ''}</div>
                         {image}
                     </div>
