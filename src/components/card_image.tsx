@@ -6,18 +6,36 @@ import {StoreState} from 'types/store';
 
 export interface Props {
     cardName: string,
-    card: Types.Card,
-    type: string
+    card?: Types.Card,
+    face?: number,
+    type: Types.ImageType
 };
 
 export class CardImage extends React.PureComponent<Props> {
+    static defaultProps: Partial<Props> = {
+        face: 0
+    }
+
+    getImageUri = () => {
+        if (!this.props.card) {
+            return null;
+        }
+
+        let imageUris = this.props.card.image_uris;
+        if (this.props.card.card_faces && this.props.card.card_faces[this.props.face]) {
+            imageUris = this.props.card.card_faces[this.props.face].image_uris;
+        }
+
+        return imageUris[this.props.type];
+    }
+
     render() {
         if (!this.props.card) {
             return <span>{'No image found'}</span>;
         }
 
         return (
-            <img src={this.props.card.image_uris[this.props.type]} />
+            <img src={this.getImageUri()} />
         );
     }
 }
@@ -29,7 +47,7 @@ interface ContainerProps {
 };
 
 interface ConnectedProps {
-    card: Types.Card
+    card?: Types.Card
 };
 
 function mapStateToProps(state: StoreState, ownProps: ContainerProps) : ConnectedProps {

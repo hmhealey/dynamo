@@ -53,8 +53,12 @@ export default class Dynamo extends React.PureComponent<Props, State> {
     render() {
         let image;
         if (this.state.card) {
-            image = <CardImage cardName={this.state.card.name} type='small'/>;
-            // image = <CardImage card={this.state.card} type='small'/>;
+            image = (
+                <CardImage
+                    cardName={this.state.card.name}
+                    type={Types.ImageType.Small}
+                />
+            );
         }
 
         return (
