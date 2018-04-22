@@ -2,7 +2,8 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {BrowserRouter, Link, Route} from 'react-router-dom';
 
-import ScryfallClient from 'client/scryfall/client';
+import * as CardActions from 'actions/cards';
+
 import * as Types from 'client/scryfall/types';
 
 import CardImage from 'components/card_image';
@@ -20,8 +21,6 @@ type State = {
 export default class Dynamo extends React.PureComponent<Props, State> {
     store = configureStore();
 
-    client = new ScryfallClient();
-
     constructor(props: Props) {
         super(props);
 
@@ -34,12 +33,7 @@ export default class Dynamo extends React.PureComponent<Props, State> {
     getCard = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        this.client.getCard(this.state.value).then(({data}) => {
-            this.store.dispatch({
-                type: 'ReceivedCard',
-                card: data
-            });
-
+        CardActions.getCardByName(this.state.value)(this.store.dispatch, this.store.getState).then(({data}) => {
             this.setState({
                 card: data
             });

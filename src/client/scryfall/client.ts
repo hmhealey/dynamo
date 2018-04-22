@@ -1,8 +1,14 @@
 import * as Types from './types';
 
-export default class ScryfallClient {
-    getCard(name: string) {
-        const url = `https://api.scryfall.com/cards/named/?exact=${encodeURIComponent(name)}`;
+export class ScryfallClient {
+    static instance = new ScryfallClient();
+
+    static getInstance = () => {
+        return ScryfallClient.instance;
+    }
+
+    getCard(name: string, fuzzy: boolean) {
+        const url = `https://api.scryfall.com/cards/named/?exact=${encodeURIComponent(name)}&fuzzy={Boolean(fuzzy)}`;
 
         return this.fetch<Types.Card>(url);
     }
@@ -39,3 +45,5 @@ export type Response<T> = {
     data?: T,
     error?: Types.Error
 };
+
+export default ScryfallClient;
