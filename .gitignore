@@ -7,5 +7,7 @@ npm-debug.log
 
 .DS_Store
 
+*.sublime-workspace
+
 cards
 dist
