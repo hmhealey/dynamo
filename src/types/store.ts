@@ -5,10 +5,6 @@ export interface Cards {
     cardIdsByName: {[id:string]:string}
 };
 
-export interface Entities {
-    cards: Cards
-};
-
 export interface StoreState {
-    entities: Entities
+    cards: Cards
 };

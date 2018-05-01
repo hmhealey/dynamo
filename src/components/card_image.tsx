@@ -52,7 +52,7 @@ interface ConnectedProps {
 
 function mapStateToProps(state: StoreState, ownProps: ContainerProps) : ConnectedProps {
     return {
-        card: state.entities.cards.cards[state.entities.cards.cardIdsByName[ownProps.cardName]]
+        card: state.cards.cards[state.cards.cardIdsByName[ownProps.cardName]]
     };
 }
 
