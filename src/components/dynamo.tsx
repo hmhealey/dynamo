@@ -7,6 +7,7 @@ import * as CardActions from 'actions/cards';
 import * as Types from 'client/scryfall/types';
 
 import CardImage from 'components/card_image';
+import DeckInput from 'components/deck_input';
 
 import configureStore from 'store';
 
@@ -30,19 +31,9 @@ export default class Dynamo extends React.PureComponent<Props, State> {
         };
     }
 
-    getCard = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        CardActions.getCardByName(this.state.value)(this.store.dispatch, this.store.getState).then(({data}) => {
-            this.setState({
-                card: data
-            });
-        });
-    };
-
-    handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         this.setState({
-            value: (e.target as HTMLInputElement).value
+            value: (e.target as HTMLTextAreaElement).value
         });
     };
 
@@ -61,16 +52,12 @@ export default class Dynamo extends React.PureComponent<Props, State> {
             <Provider store={this.store}>
                 <div style={{display: 'flex', height: '100%'}}>
                     <div style={{backgroundColor: 'red', display: 'flex', width: 300}}>
-                        <textarea style={{flex: 1, resize: 'none'}}/>
+                        <DeckInput
+                            onChange={this.handleChange}
+                            value={this.state.value}
+                        />
                     </div>
                     <div style={{backgroundColor: 'blue', flex: 1}}>
-                        <form onSubmit={this.getCard}>
-                            <input onChange={this.handleChange} value={this.state.value}/>
-                            <input
-                                type='submit'
-                                value='Clicky'
-                            />
-                        </form>
                         <div>{this.state.card ? JSON.stringify(this.state.card) : ''}</div>
                         {image}
                     </div>

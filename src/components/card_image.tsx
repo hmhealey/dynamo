@@ -2,8 +2,6 @@ import React from 'react';
 
 import * as Types from 'client/scryfall/types';
 
-import {StoreState} from 'types/store';
-
 export interface Props {
     cardName: string,
     card?: Types.Card,
@@ -42,18 +40,16 @@ export class CardImage extends React.PureComponent<Props> {
 
 import {connect} from 'react-redux';
 
+import {StoreState} from 'types/store';
+
 interface ContainerProps {
     cardName: string
 };
 
-interface ConnectedProps {
-    card?: Types.Card
-};
-
-function mapStateToProps(state: StoreState, ownProps: ContainerProps) : ConnectedProps {
+function mapStateToProps(state: StoreState, ownProps: ContainerProps) {
     return {
         card: state.cards.cards[state.cards.cardIdsByName[ownProps.cardName]]
     };
 }
 
-export default connect(mapStateToProps)(CardImage);
+export default connect(mapStateToProps, null)(CardImage);

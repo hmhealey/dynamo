@@ -1,6 +1,3 @@
-// import * as ReduxTypes from '@src/redux';
-import {Dispatch} from 'react-redux';
-
 import {
     ScryfallClient,
     Response,
@@ -9,26 +6,56 @@ import {
 
 import * as CardSelectors from 'selectors/cards';
 
-import {Action} from 'types/actions';
-import {StoreState} from 'types/store';
+import {
+    AsyncAction,
+    Dispatch,
+    GetState
+} from 'types/store';
 
-export function getCardByName(name: string, fuzzy: boolean = false) {
-    return (dispatch: Dispatch<Action>, getState: () => StoreState): Promise<Response<Types.Card>> => {
+export function getCardByName(name: string, fuzzy: boolean = false): AsyncAction<Promise<Types.Card>> {
+    return (dispatch: Dispatch, getState: GetState): Promise<Types.Card> => {
         const existingCard = CardSelectors.getCardByName(getState(), name);
 
         if (existingCard) {
-            return Promise.resolve({data: existingCard});
+            return Promise.resolve(existingCard);
         }
 
         return new Promise((resolve) => {
-            ScryfallClient.getInstance().getCard(name, fuzzy).then(({data}) => {
+            ScryfallClient.getInstance().getCardByName(name, {fuzzy}).then(({data}) => {
                 dispatch({
                     type: 'ReceivedCard',
                     card: data
                 });
 
-                resolve({data});
+                resolve(data);
             });
+        });
+    };
+}
+
+export function getCardsIfNecessary(names: string[]): AsyncAction<Promise<void>> {
+    return (dispatch: Dispatch, getState: GetState) => {
+        return new Promise((resolve) => {
+            let index = 0;
+
+            const getNextCard = function() {
+                if (index >= names.length) {
+                    return;
+                }
+
+                const name = names[index].trim();
+                index += 1;
+
+                if (name) {
+                    dispatch(getCardByName(name)).then(() => {
+                        setTimeout(getNextCard, 200);
+                    });
+                } else {
+                    getNextCard();
+                }
+            };
+
+            getNextCard();
         });
     };
 }
