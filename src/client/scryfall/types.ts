@@ -9,7 +9,7 @@ export enum BorderColor {
 export interface Card {
     id: string,
     oracle_id: string,
-    // multiverse_ids: string[],
+    // multiverse_ids: number[],
     // mtgo_id: number,
     // mtgo_foil_id: number,
     // uri: string,
@@ -109,4 +109,42 @@ export enum Rarity {
     Uncommon = 'uncommon',
     Rare = 'rare',
     MythicRare = 'mythic',
+};
+
+export interface Set {
+    code: string,
+    mtgo_code: string,
+    name: string,
+    set_type: SetType,
+    released_at: Date,
+    block_code: string,
+    block: string,
+    parent_set_code: string,
+    card_count: number,
+    digital: boolean,
+    foil_only: boolean,
+    icon_svg_uri: string,
+    search_uri: string
+};
+
+export enum SetType {
+    Core = 'core',
+    Expansion = 'expansion',
+    Masters = 'masters',
+    Masterpiece = 'masterpiece',
+    FromTheVault = 'from_the_vault',
+    Spellbook = 'spellbook',
+    PremiumDeck = 'premium_deck',
+    DuelDeck = 'duel_deck',
+    Commander = 'commander',
+    Planechase = 'planechase',
+    Conspiracy = 'conspiracy',
+    Archenemy = 'archenemy',
+    Vanguard = 'vanguard',
+    Funny = 'funny',
+    Starter = 'starter',
+    Box = 'box',
+    Promo = 'promo',
+    Token = 'token',
+    Memorabilia = 'memorabilia'
 };
