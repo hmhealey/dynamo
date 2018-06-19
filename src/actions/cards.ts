@@ -10,7 +10,7 @@ import {
     AsyncAction,
     Dispatch,
     GetState
-} from 'types/store';
+} from 'types/redux';
 
 export function getCardByName(name: string, fuzzy: boolean = false): AsyncAction<Promise<Types.Card>> {
     return (dispatch: Dispatch, getState: GetState): Promise<Types.Card> => {

@@ -50,7 +50,8 @@ import {connect} from 'react-redux';
 
 import {getCardsIfNecessary} from 'actions/cards';
 
-import {Dispatch, StoreState} from 'types/store';
+import {Dispatch} from 'types/redux';
+import {StoreState} from 'types/store';
 
 interface ContainerProps {
 };

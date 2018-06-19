@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
-import {Cards} from 'types/store';
 import * as Actions from 'types/actions';
+import {Cards} from 'types/store';
 
 function cards(state: Cards['cards'] = {}, action: Actions.Action): any {
     switch (action.type) {
