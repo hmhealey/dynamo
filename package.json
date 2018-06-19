@@ -5,6 +5,7 @@
   "repository": "https://github.com/hmhealey/dynamo",
   "author": "hmhealey",
   "dependencies": {
+    "@types/webpack-env": "^1.13.6",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-redux": "^5.0.6",
