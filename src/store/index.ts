@@ -3,9 +3,12 @@ import thunk from 'redux-thunk';
 
 import rootReducer from 'reducers';
 
+import omnidoorThragfire from '../omnidoor_thragfire';
+
 export default function configureStore() {
     const store = createStore(
         rootReducer,
+        omnidoorThragfire,
         applyMiddleware(thunk)
     );
 
