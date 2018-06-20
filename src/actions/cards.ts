@@ -40,13 +40,14 @@ export function getCardsIfNecessary(names: string[]): AsyncAction<Promise<void>>
 
             const getNextCard = function() {
                 if (index >= names.length) {
+                    resolve();
                     return;
                 }
 
                 const name = names[index].trim();
                 index += 1;
 
-                if (name) {
+                if (name && !CardSelectors.getCardByName(getState(), name)) {
                     dispatch(getCardByName(name)).then(() => {
                         setTimeout(getNextCard, 200);
                     });
