@@ -24,6 +24,7 @@ export function getCardByName(name: string, fuzzy: boolean = false): AsyncAction
             ScryfallClient.getInstance().getCardByName(name, {fuzzy}).then(({data}) => {
                 dispatch({
                     type: 'ReceivedCard',
+                    name,
                     card: data
                 });
 
