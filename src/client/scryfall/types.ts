@@ -13,7 +13,7 @@ export interface Card {
     // mtgo_id: number,
     // mtgo_foil_id: number,
     // uri: string,
-    // scryfall_uri: string,
+    scryfall_uri: string,
     // prints_search_uri: string,
     // rulings_uri: string,
 

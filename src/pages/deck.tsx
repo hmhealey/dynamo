@@ -1,20 +1,17 @@
 import React from 'react';
 
+import DeckList from 'components/deck_list';
 import PageLayout from 'components/page_layout';
 
 export default class Deck extends React.PureComponent {
     render() {
         return (
             <PageLayout>
-                <h1>{'Omnidoor Thragfire'}</h1>
-                <h2>{'Main Deck'}</h2>
-                <ul>
-                    {mainDeck.split('\n').map((row) => <li key={row}>{row}</li>)}
-                </ul>
-                <h2>{'Sideboard'}</h2>
-                <ul>
-                    {sideboard.split('\n').map((row) => <li key={row}>{row}</li>)}
-                </ul>
+                <DeckList
+                    name={'Omnidoor Thragfire'}
+                    mainDeck={mainDeck}
+                    sideboard={sideboard}
+                />
             </PageLayout>
         );
     }
