@@ -3,14 +3,13 @@ import React from 'react';
 import * as Types from 'client/scryfall/types';
 
 export interface Props {
-    card?: Types.Card,
-    cardId: string
+    card?: Types.Card
 }
 
 export default class CardLink extends React.PureComponent<Props> {
     render() {
         if (!this.props.card) {
-            return `[Card ${this.props.cardId} not found]`;
+            return `[Card not found]`;
         }
 
         return (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DeckList from 'components/deck_list';
+import DeckList from 'components/deck_list/index';
 import PageLayout from 'components/page_layout';
 
 import {Deck} from 'types/store';
