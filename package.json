@@ -9,7 +9,8 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "reselect": "^3.0.1"
   },
   "devDependencies": {
     "@types/es6-promise": "^3.3.0",
@@ -29,7 +30,7 @@
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "server": "webpack-dev-server --config webpack.config.js",
+    "start": "webpack-dev-server --config webpack.config.js",
     "watch": "webpack --config webpack.config.js --watch"
   }
 }

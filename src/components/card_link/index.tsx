@@ -4,13 +4,13 @@ import {StoreState} from 'types/store';
 
 import CardLink from './card_link';
 
-interface ContainerProps {
-    cardName: string
-}
+type ContainerProps = {
+    cardId: string
+};
 
 function mapStateToProps(state: StoreState, ownProps: ContainerProps) {
     return {
-        card: state.cards.cards[state.cards.cardIdsByName[ownProps.cardName]]
+        card: state.cards.cards[ownProps.cardId]
     };
 }
 

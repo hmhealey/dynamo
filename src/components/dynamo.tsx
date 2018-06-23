@@ -2,7 +2,7 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {BrowserRouter, Route} from 'react-router-dom';
 
-import Deck from 'pages/deck';
+import DeckView from 'pages/deck_view';
 
 import configureStore from 'store';
 
@@ -19,7 +19,7 @@ export default class Dynamo extends React.PureComponent<Props, State> {
         return (
             <Provider store={this.store}>
                 <BrowserRouter>
-                    <Route path='/' component={Deck} />
+                    <Route path='/' component={DeckView} />
                 </BrowserRouter>
             </Provider>
         );

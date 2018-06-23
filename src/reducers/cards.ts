@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux';
 
-import * as Actions from 'types/actions';
-import {Cards} from 'types/store';
+import {Card} from 'client/scryfall/types';
 
-function cards(state: Cards['cards'] = {}, action: Actions.Action): any {
+import * as Actions from 'types/actions';
+import {StoreState} from 'types/store';
+
+function cards(state: {[id: string]: Card} = {}, action: Actions.Action): any {
     switch (action.type) {
     case 'ReceivedCard':
         return {
@@ -16,7 +18,7 @@ function cards(state: Cards['cards'] = {}, action: Actions.Action): any {
     }
 }
 
-function cardIdsByName(state: Cards['cardIdsByName'] = {}, action: Actions.Action): any {
+function cardIdsByName(state: {[name: string]: string} = {}, action: Actions.Action): any {
     switch (action.type) {
     case 'ReceivedCard': {
         const nextState = {
