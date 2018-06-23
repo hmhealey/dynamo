@@ -1,0 +1,1 @@
+- When using connect with ownProps on mapStateToProps, you need to pass a null mapDispatchToProps to avoid type errors

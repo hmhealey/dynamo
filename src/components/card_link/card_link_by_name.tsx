@@ -4,9 +4,9 @@ import {StoreState} from 'types/store';
 
 import CardLink from './card_link';
 
-type ContainerProps = {
+interface ContainerProps {
     cardName: string
-};
+}
 
 function mapStateToProps(state: StoreState, ownProps: ContainerProps) {
     return {

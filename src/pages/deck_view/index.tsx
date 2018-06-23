@@ -10,4 +10,4 @@ function mapStateToProps(state: StoreState) {
     };
 }
 
-export default connect(mapStateToProps, null)(DeckView);
+export default connect(mapStateToProps)(DeckView);
