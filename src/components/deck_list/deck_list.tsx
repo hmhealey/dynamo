@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Card} from 'client/scryfall/types';
 
-import CardLink from 'components/card_link/card_link';
+import CardLink from 'components/card_link';
 
 import {Deck} from 'types/store';
 
