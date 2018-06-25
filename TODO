@@ -1,0 +1,12 @@
+- separate card types from scryfall client
+- add actions for scryfall client
+- flesh out scryfall client
+- use router to switch between
+	- pages for at least a couple decks
+	- pages for cards
+- (possibly in a fork) implement styled components with themes
+
+
+## maybe
+- build a scraper for deckbox or tappedout
+- add tests (enzyme or otherwise)
